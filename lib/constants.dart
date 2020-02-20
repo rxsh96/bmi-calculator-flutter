@@ -11,6 +11,8 @@ const kSliderActiveColor = Color(0xFFEB1555);
 const kSliderActiveAlphaColor = Color(0x29EB1555);
 const kSliderInactiveColor = Color(0xFF8D8E98);
 
+const kIconButtonColor = Color(0xFF4C4F5E);
+
 const kMinHeight = 100.0;
 const kMaxHeight = 220.0;
 
