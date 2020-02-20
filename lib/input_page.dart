@@ -3,12 +3,27 @@ import 'package:bmi_calculator/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
+const bottomContainerHeight = 80.0;
+const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
+const bottomContainerColor = Color(0xFFEB1555);
+
+
+enum Gender{
+  male,
+  female,
+}
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
+
+  Gender selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,21 +36,35 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: MyCard(
-                    cardChild: IconContent(
-                      genderIcon: FontAwesomeIcons.mars,
-                      genderText: 'MALE',
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    child: MyCard(
+                      cardChild: IconContent(
+                        genderIcon: FontAwesomeIcons.mars,
+                        genderText: 'MALE',
+                      ),
+                      color: selectedGender == Gender.male ? activeCardColor : inactiveCardColor,
                     ),
-                    color: Color(0xFF1D1E33),
                   ),
                 ),
                 Expanded(
-                  child: MyCard(
-                    cardChild: IconContent(
-                      genderIcon: FontAwesomeIcons.venus,
-                      genderText: 'FEMALE',
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    child: MyCard(
+                      cardChild: IconContent(
+                        genderIcon: FontAwesomeIcons.venus,
+                        genderText: 'FEMALE',
+                      ),
+                      color: selectedGender == Gender.female ? activeCardColor : inactiveCardColor,
                     ),
-                    color: Color(0xFF1D1E33),
                   ),
                 ),
               ],
@@ -43,7 +72,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: MyCard(
-              color: Color(0xFF1D1E33),
+              color: activeCardColor,
             ),
           ),
           Expanded(
@@ -51,22 +80,22 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: MyCard(
-                    color: Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 ),
                 Expanded(
                   child: MyCard(
-                    color: Color(0xFF1D1E33),
+                    color: activeCardColor,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: Colors.redAccent,
+            color: bottomContainerColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            height: 60.0,
+            height: bottomContainerHeight,
           ),
         ],
       ),
