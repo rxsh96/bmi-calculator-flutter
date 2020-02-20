@@ -1,6 +1,9 @@
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/icon_content.dart';
-import 'package:bmi_calculator/my_card.dart';
+import 'package:bmi_calculator/components/my_card.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,6 +13,9 @@ enum Gender {
 }
 
 class InputPage extends StatefulWidget {
+
+  static const String ID = 'inputPage';
+
   @override
   _InputPageState createState() => _InputPageState();
 }
@@ -149,7 +155,7 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             RoundIconButton(
-                              myPressed: (){
+                              myPressed: () {
                                 setState(() {
                                   weight--;
                                 });
@@ -160,7 +166,7 @@ class _InputPageState extends State<InputPage> {
                               width: 10.0,
                             ),
                             RoundIconButton(
-                              myPressed: (){
+                              myPressed: () {
                                 setState(() {
                                   weight++;
                                 });
@@ -191,7 +197,7 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             RoundIconButton(
-                              myPressed: (){
+                              myPressed: () {
                                 setState(() {
                                   age--;
                                 });
@@ -202,7 +208,7 @@ class _InputPageState extends State<InputPage> {
                               width: 10.0,
                             ),
                             RoundIconButton(
-                              myPressed: (){
+                              myPressed: () {
                                 setState(() {
                                   age++;
                                 });
@@ -219,11 +225,16 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          BottomButton(
+            buttonTitle: 'CALCULATE',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -231,24 +242,4 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({this.iconData, this.myPressed});
 
-  final IconData iconData;
-  final Function myPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      elevation: 0.0,
-      child: Icon(iconData),
-      onPressed: myPressed,
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: kIconButtonColor,
-    );
-  }
-}
